@@ -11,7 +11,7 @@ public class Task_1000 {
         x = in.nextInt();
         System.out.println("Введите число B:");
         y = in.nextInt();
-        System.out.println("Сумма чисел " + x + " и " +  y + " Ровна " +(x+y));
+        System.out.println("Суммаа чисел " + x + " и " +  y + " Ровна " +(x+y));
 
     }
 }

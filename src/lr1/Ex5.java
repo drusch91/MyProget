@@ -16,7 +16,7 @@ public class Ex5 {
         System.out.println("Input height: ");
         float height = in.nextFloat();
 
-        System.out.printf("Name: %s  Age: %d  MHeight: %.2f \n, name, age, height");
+        System.out.printf("Name: %s  Age: %d  MHeight: %.2f \n", name, age, height);
         in.close();
     }
 }
