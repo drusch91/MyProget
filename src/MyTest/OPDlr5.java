@@ -1,143 +1,87 @@
 package MyTest;
-
 import java.util.Scanner;
-
-
 public class OPDlr5 {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int sizeArr = 3;
-
-        //Создаем массивы со временем выполнения работ
-
-        float[] arr1 = new float[sizeArr];
-        float[] arr2 = new float[sizeArr];
-        float[] arr3 = new float[sizeArr];
-        float[] arr4 = new float[sizeArr];
-
-        //Заполняем массивы значениями
-
-        System.out.print("Введите статистику для одного экрана: ");
-        for (int i = 0; i < arr1.length; i++){
-            arr1[i] = in.nextFloat();
-        }
-        System.out.print("Введите статистику для одного обрабртчика событий: ");
-        for (int i = 0; i < arr1.length; i++){
-            arr2[i] = in.nextFloat();
-        }
-        System.out.print("Введите статистику для нового бизнес-объекта: ");
-        for (int i = 0; i < arr1.length; i++){
-            arr3[i] = in.nextFloat();
-        }
-        System.out.print("Введите статистику для добавления нового бизнес-метода: ");
-        for (int i = 0; i < arr1.length; i++){
-            arr4[i] = in.nextFloat();
-        }
-
-        //Заполняем прикладную разработку данными
-
-        System.out.print("Введите количество пользовательских экранов: ");
-        float kUi = in.nextFloat();
-        System.out.print("количество обработчиков событий: ");
-        float kAct = in.nextFloat();
-        System.out.print("количество новых бизнес-объектов: ");
-        float kBo = in.nextFloat();
-        System.out.print("Введите количество новых или модифицируемых бизнес-методов: ");
-        float kBm = in.nextFloat();
-
-        //Считаем время выполнения работ с заданными данными
-
-        for (int i = 0; i < arr1.length; i++){
-            arr1[i] *= kUi;
-        }
-        for (int i = 0; i < arr2.length; i++){
-            arr2[i] *= kAct;
-        }
-        for (int i = 0; i < arr3.length; i++){
-            arr3[i] *= kBo;
-        }
-        for (int i = 0; i < arr4.length; i++){
-            arr4[i] *= kBm;
-        }
-
-        //Считаем оценку средней трудоемкости кодирования (Еi = (Pi + 4Mi + Oi)/6)
-
-        System.out.println("\nОценка средней трудоемкости кодирования:");
-        float eUi = (arr1[1] + (4 * arr1[2]) + arr1[0]) / 6f;
-        System.out.printf("Eui = %.2f \n", eUi);
-        float eAct = (arr2[1] + (4 * arr2[2]) + arr2[0]) / 6f;
-        System.out.printf("Eact = %.2f \n", eAct);
-        float eBo = (arr3[1] + (4 * arr3[2]) + arr3[0]) / 6f;
-        System.out.printf("Ebo = %.2f \n", eBo);
-        float eBm = (arr4[1] + (4 * arr4[2]) + arr4[0]) / 6f;
-        System.out.printf("Ebm = %.2f \n \n", eBm);
-
-        //Считаем среднеквадратичное отклонение (СКОi = (Pi – Oi)/6)
-
-        System.out.println("\nCреднеквадратичное отклонение:");
-        float ckoUi = (arr1[1] - arr1[0]) / 6;
-        System.out.printf("CKOui = %.2f \n", ckoUi);
-        float ckoAct = (arr2[1] - arr2[0]) / 6;
-        System.out.printf("CKOAct = %.2f \n", ckoAct);
-        float ckoBo = (arr3[1] - arr3[0]) / 6;
-        System.out.printf("CKObo = %.2f \n", ckoBo);
-        float ckoBm = (arr4[1] - arr4[0]) / 6;
-        System.out.printf("CKObm = %.2f \n", ckoBm);
-
-        //Считаем суммарную трудоемкость проекта (Е = Σ Ei)
-
-        System.out.println("\nСуммарная трудоемкость проекта:");
-        float e = eUi + eAct + eBo + eBm;
-        System.out.printf("E = %.2f \n", e);
-
-        //Считаем среднеквадратичное отклонение для оценки суммарной трудоемкости кодирования
-
-        double lvlCkoUi = Math.pow(ckoUi, 2);
-        double lvlCkoAct = Math.pow(ckoAct, 2);
-        double lvlCkoBo = Math.pow(ckoBo, 2);
-        double lvlCkoBm = Math.pow(ckoBm, 2);
-        System.out.println("\nCреднеквадратичное отклонение для оценки суммарной трудоемкости кодирования:");
-        float cko1 = (float) (lvlCkoUi * 20 + lvlCkoAct * 60 + lvlCkoBo * 16 + lvlCkoBm * 40);
-        float cko = (float) Math.sqrt(cko1);
-        System.out.printf("CKO = %.2f \n", cko);
-
-        //Считаем суммарную трудоемкости кодирования проекта (E95% = E + 2 * СКО)
-
-        System.out.println("\nСуммарная трудоемкость кодирования проекта:");
+    public static void main(String[] args){
+        float[] oneDis, eventHand, busObject, addNewBusMethod;
+        oneDis = getClock("Введите статистические данные для одного экрана:");
+        eventHand = getClock("Введите данные для одного обработчика событий:");
+        busObject = getClock("Введите данные для одного бизнес-объекта:");
+        addNewBusMethod = getClock("Введите данные для добавления нового бизнес-метода:");
+        int[] numberElement = getNumberElement();
+        float e = avComOfCod(oneDis) * numberElement[0] + avComOfCod(eventHand) * numberElement[1] + avComOfCod(busObject)
+                * numberElement[2] + avComOfCod(addNewBusMethod) * numberElement[3];
+        float cko =(float) (Math.pow(avDeviation(oneDis), 2)*numberElement[0] + Math.pow(avDeviation(eventHand), 2)*
+                numberElement[1] + Math.pow(avDeviation(busObject), 2) * numberElement[2] +
+                Math.pow(avDeviation(addNewBusMethod), 2) * numberElement[3]);
+        cko = (float) Math.sqrt(cko);
         float e95 = e + 2 * cko;
-        System.out.printf("E95 = %.2f \n", e95);
+        float delta = (cko/e)*100;
+        float esum = e95*4;
+        float ncm = esum / 132;
+        double t = 3;
+        t = 1 / t;
+        t = (float) (Math.pow((ncm), (t)));
+        t = (float) (t * 2.5);
+        float kav = (float) (ncm / t);
 
-        //Считаем относительную погрешность в оценке суммарной трудоемкости (Δ= (СКО / Е)*100)
 
-        System.out.println("\nОтносительная погрешность в оценке суммарной трудоемкости:");
-        float d = (cko / e) * 100;
-        System.out.printf("Δ = %.2f \n", d);
-        //Считаем общую трудоемкость проекта (EΣ= 4* E95%)
-        System.out.println("\nОбщая трудоемкость проекта:");
-        float eSum = 4 * e95;
-        System.out.printf("EΣ = %.2f \n", eSum);
+        System.out.println("Eui="+avComOfCod(oneDis) + " (чел.*час)");
+        System.out.println("EAct="+avComOfCod(eventHand) + " (чел.*час)");
+        System.out.println("Ebo="+avComOfCod(busObject) + " (чел.*час)");
+        System.out.println("Eui="+avComOfCod(addNewBusMethod) + " (чел.*час)");
+        System.out.println();
+        System.out.println("CKOui="+avDeviation(oneDis) + " (чел.*час)");
+        System.out.println("CKOAct="+avDeviation(eventHand) + " (чел.*час)");
+        System.out.println("CKObo="+avDeviation(busObject) + " (чел.*час)");
+        System.out.println("CKObm="+avDeviation(addNewBusMethod) + " (чел.*час)");
 
-        //Пересчёт человеко-часов в человеко-месяцы (N ч.*м. = EΣ/132)
-
-        System.out.println("\nПересчёт человеко-часов в человеко-месяцы:");
-        float nM = eSum / 132;
-        System.out.printf("N ч.*м. = %.2f \n", nM);
-
-        //Считаем время выполнения графика для первой поставки (T = 2,5 (N ч.*м.)^1/3,)
-
-        double num1 = 1;
-        double num2 = 3;
-        double division = num1 / num2;
-        double result = Math.pow(nM, division);
-        System.out.println("\nВремя выполнения графика для первой поставки:");
-        float t = (float) (2.5 * (result));
-        System.out.printf("T = %.2f \n", t);
-
-        //Считаем среднюю численность команды: (К = N ч.*м. / Т)
-
-        System.out.println("\nсредняя численность команды:");
-        float k = nM / t;
-        System.out.printf("K = %.2f \n", k);
+        System.out.println("E=" + e + " (чел.*час)");
+        System.out.println("СКО=" + cko + " (чел.*час)");
+        System.out.println("E95=" + e95 + " (чел.*час)");
+        System.out.println("Δ="+delta + " (%)");
+        System.out.println("Esum="+esum + " чел.*час");
+        System.out.println("Nm=" + ncm + " (чел. * месяцах_");
+        System.out.println("T=" + t + " (месяцев)");
+        System.out.println("K=" + kav + " (человек)");
     }
-}
+    static float[] getClock(String message){
+        /// Указываем время необходимое для разработки и отладки
+        System.out.println(message);
+        Scanner in = new Scanner(System.in);
+        float[] array = new float[3];
+        for (int i=0; i < array.length; i++){
+            array[i] = in.nextInt();
+        }
+        return array;
+    }
 
+    static int[] getNumberElement(){
+        int[] array = new int[4];
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите количество пользовательских экранов:");
+        array[0] = in.nextInt();
+        System.out.println("Введите количество обработчиков событий:");
+        array[1] = in.nextInt();
+        System.out.println("Введите количество новых бизнес объектов:");
+        array[2] = in.nextInt();
+        System.out.println("Введите количество новых или мод-ых бизнес объектов:");
+        array[3] = in.nextInt();
+
+        return array;
+    }
+
+    static float avComOfCod(float[] array){ // Оценка средней трудоемкости по каждому элементарному пакету
+        float result;
+        result = (array[1] + 4 * array[2] + array[0])/6;
+
+        return result;
+    }
+
+    static float avDeviation(float[] array){
+        float result;
+        result = (array[1] - array[0])/6;
+        return result;
+    }
+
+//    static float sumAvComOfCod();
+}
