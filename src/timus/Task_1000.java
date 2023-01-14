@@ -5,13 +5,11 @@ public class Task_1000 {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
-        int x = 0;
-        int y = 0;
-        System.out.println("Введите число A:");
-        x = in.nextInt();
-        System.out.println("Введите число B:");
+        int x;
+        int y;
+        x = in.nextInt();;
         y = in.nextInt();
-        System.out.println("Суммаа чисел " + x + " и " +  y + " Ровна " +(x+y));
+        System.out.println(x+y);
 
     }
 }
